@@ -92,14 +92,12 @@ with st.sidebar:
 
 #Implement topic processing:
 topic = st.text_input('Enter a topic:', 'e.g., Quantum Computing')  
-
 if st.button("Start"):
-    with st.spinner("Generating Knowledge Base..Please wait"):
-        professor_response = professor_agent.run(f"topic: {topic}")
-
-    with st.spinner("Generating Knowledge Base..Please wait"):
-        academic_response = academic_advisor_agent.run(f"topic: {topic}")  
-
+    with st.spinner("Generating Knowledge Base..."):
+        professor_response = professor_agent.run(
+            f"topic: {topic}"
+        )
+professor_doc_link = "afi"
 
 #Extract Google Doc links:        
 def extract_google_doc_link(response_content):
@@ -123,8 +121,7 @@ if not st.session_state['openai_api_key'] or not st.session_state['composio_api_
     st.stop()
 
 try:
-   composio_toolset = 
-   ComposionToolSet(api_key=st.session_state['composio_api_key'])
+   composio_toolset = ComposioToolSet(api_key=st.session_state['composio_api_key'])
 except Exception as e:
     st.error(f"Error initializing Composio: {e}")
     st.stop()       
