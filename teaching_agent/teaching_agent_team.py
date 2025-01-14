@@ -2,7 +2,7 @@
 import streamlit as st
 from phi.agent import Agent, RunResponse
 from phi.model.openai import OpenAIChat
-from composio_phidata import Action, ComposionToolSet
+from composio_phidata import Action, ComposioToolSet
 import os
 from phi.tools.arxiv_toolkit import ArxivToolkit
 from phi.utils.pprint import pprint_run_response
@@ -29,7 +29,7 @@ google_docs_tool_update = composio_toolset.get_tools(actions=[Action.GOOGLEDOCS_
 professor_agent = Agent(name='Research Associate',
                         role='Research Specialist',
                         model=OpenAIChat(id="gpt-4o-mini"),
-                        tools=[googl_docs_tool],
+                        tools=[google_docs_tool],
                         instructions=[
         "Create comprehensive knowledge base",
         "Explain from first principles",
@@ -103,13 +103,13 @@ if st.button("Start"):
 
 #Extract Google Doc links:        
 def extract_google_doc_link(response_content):
-    if ""https://docs.google.com" in response_content:
+    if "https://docs.google.com" in response_content:
         return response_content.split("https://docs.google.com")[1].split("")[0]
     return None
 
 st.markdown('### Google Doc Links:')
 if professor_doc_link:
-    st.markdown((f"- **Professor Document:** [View](https://docs.google.com{professor_doc_link})")
+    st.markdown(f"- **Professor Document:** [View](https://docs.google.com{professor_doc_link})")
                 
 
 #Display agent responses:
@@ -131,5 +131,5 @@ except Exception as e:
 
 #Progress tracking:
 with st.spinner("Creating Practice Material..."):
-    teaching_assistant_response = teaching_assistant_agent.run(f"topic: {topic}")  
-    st.success("Practice Material Created!") 
+    teaching_assistant_response = teaching_assistant_agent.run(f"topic: {topic}") 
+    st.success("Practice Material Created!")
