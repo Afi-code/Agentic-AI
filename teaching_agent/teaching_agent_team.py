@@ -10,7 +10,8 @@ from phi.tools.serpapi_tools import SerpApiTools
 
 
 #Initialize session state and API configuration:
-st.set_page_config(page_title = 'Teaching Agent', page_icon = '🤖')
+st.set_page_config(page_title = 'Teaching Agent with AI', page_icon = '🤖')
+
 
 if 'openai_api_key' not in st.session_state:
     st.session_state.openai_api_key = '' 
